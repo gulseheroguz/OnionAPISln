@@ -47,7 +47,7 @@ namespace OnionAPI.Persistence.Configurations
 
             Category parent2 = new()
             {
-                Id = 3,
+                Id = 4,
                 Name = "Kadın",
                 Priorty = 1,
                 ParentId = 2,

@@ -1,4 +1,7 @@
 ﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using OnionAPI.Application.DTOs;
+using OnionAPI.Application.Interfaces.AutoMapper;
 using OnionAPI.Application.Interfaces.IUnitOfWorks;
 using OnionAPI.Domain.Entities;
 using System;
@@ -10,31 +13,43 @@ using System.Threading.Tasks;
 
 namespace OnionAPI.Application.Features.Products.Command.Queries.GetAllProducts
 {
-    public class GetAllPRoductQueryHandler : IRequestHandler<GetAllProductQueryRequest, IList<GetAllProductQueryResponse>>
+    public class GetAllProductQueryHandler : IRequestHandler<GetAllProductQueryRequest, IList<GetAllProductQueryResponse>>
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IMapper _mapper;
 
-        public GetAllPRoductQueryHandler(IUnitOfWork unitOfWork)
+        public GetAllProductQueryHandler(IUnitOfWork unitOfWork, IMapper mapper)
         {
             _unitOfWork = unitOfWork;
+            _mapper = mapper;
         }
 
         public async Task<IList<GetAllProductQueryResponse>> Handle(GetAllProductQueryRequest request, CancellationToken cancellationToken)
         {
-            var products = await _unitOfWork.GetReadRepository<Product>().GetAllAsync();
-            List<GetAllProductQueryResponse> response = new();
+            var products = await _unitOfWork.GetReadRepository<Product>().GetAllAsync(include: x => x.Include(b => b.Brand));
 
-            foreach (var product in products)
-                response.Add(new GetAllProductQueryResponse
+            var brand = _mapper.Map<BrandDto, Brand>(new Brand());
 
-                {
-                    Title = product.Title,
-                    Description = product.Description,
-                    Discount = product.Discount,
-                    Price = product.Price - (product.Price * product.Discount / 100)
+            var map =_mapper.Map<GetAllProductQueryResponse, Product>(products);
 
-                });
-            return response;
+            foreach (var product in map)
+                product.Price -= (product.Price * product.Discount / 100);
+
+            return map;
+
+            //List<GetAllProductQueryResponse> response = new();
+
+            //foreach (var product in products)
+            //    response.Add(new GetAllProductQueryResponse
+
+            //    {
+            //        Title = product.Title,
+            //        Description = product.Description,
+            //        Discount = product.Discount,
+            //        Price = product.Price - (product.Price * product.Discount / 100)
+
+            //    });
+            //return response;
         }
     }
 }

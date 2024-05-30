@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OnionAPI.Persistence.Context;
 
@@ -11,9 +12,11 @@ using OnionAPI.Persistence.Context;
 namespace OnionAPI.Persistence.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240528075737_createData")]
+    partial class createData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,23 +67,23 @@ namespace OnionAPI.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(5135),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(308),
                             IsDeleted = false,
-                            Name = "Books"
+                            Name = "Grocery & Games"
                         },
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(5799),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(346),
                             IsDeleted = false,
-                            Name = "Grocery & Industrial"
+                            Name = "Tools, Music & Clothing"
                         },
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(5820),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(357),
                             IsDeleted = false,
-                            Name = "Music & Baby"
+                            Name = "Books"
                         });
                 });
 
@@ -116,7 +119,7 @@ namespace OnionAPI.Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(8245),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(4461),
                             IsDeleted = false,
                             Name = "Elektronik",
                             ParentId = 0,
@@ -125,7 +128,7 @@ namespace OnionAPI.Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(8246),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(4464),
                             IsDeleted = false,
                             Name = "Moda",
                             ParentId = 0,
@@ -134,7 +137,7 @@ namespace OnionAPI.Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(8248),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(4466),
                             IsDeleted = false,
                             Name = "Bilgisayar",
                             ParentId = 1,
@@ -143,7 +146,7 @@ namespace OnionAPI.Persistence.Migrations
                         new
                         {
                             Id = 4,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 436, DateTimeKind.Local).AddTicks(8249),
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 145, DateTimeKind.Local).AddTicks(4469),
                             IsDeleted = false,
                             Name = "Kadın",
                             ParentId = 2,
@@ -187,28 +190,28 @@ namespace OnionAPI.Persistence.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 439, DateTimeKind.Local).AddTicks(5311),
-                            Description = "Değirmeni gazete nihil eve göze.",
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 149, DateTimeKind.Local).AddTicks(7832),
+                            Description = "Kalemi quasi numquam consectetur cezbelendi.",
                             IsDeleted = false,
-                            Title = "Doğru."
+                            Title = "Gitti."
                         },
                         new
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 439, DateTimeKind.Local).AddTicks(5341),
-                            Description = "Labore autem çarpan velit amet.",
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 149, DateTimeKind.Local).AddTicks(7924),
+                            Description = "Amet aliquam nostrum qui velit.",
                             IsDeleted = false,
-                            Title = "Patlıcan."
+                            Title = "Sarmal."
                         },
                         new
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 439, DateTimeKind.Local).AddTicks(5407),
-                            Description = "Dolore masaya sevindi bundan vitae.",
+                            CreatedDate = new DateTime(2024, 5, 28, 10, 57, 37, 149, DateTimeKind.Local).AddTicks(7966),
+                            Description = "Sayfası gördüm vitae sarmal oldular.",
                             IsDeleted = false,
-                            Title = "Sıradanlıktan."
+                            Title = "Ama."
                         });
                 });
 
@@ -248,30 +251,6 @@ namespace OnionAPI.Persistence.Migrations
                     b.HasIndex("BrandId");
 
                     b.ToTable("Products");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            BrandId = 1,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 442, DateTimeKind.Local).AddTicks(3292),
-                            Description = "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
-                            Discount = 4.976317921850m,
-                            IsDeleted = false,
-                            Price = 829.50m,
-                            Title = "Incredible Steel Shirt"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BrandId = 2,
-                            CreatedDate = new DateTime(2024, 5, 28, 11, 0, 30, 442, DateTimeKind.Local).AddTicks(3318),
-                            Description = "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
-                            Discount = 2.071263317834580m,
-                            IsDeleted = false,
-                            Price = 383.21m,
-                            Title = "Refined Concrete Soap"
-                        });
                 });
 
             modelBuilder.Entity("CategoryProduct", b =>
